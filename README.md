@@ -28,13 +28,13 @@ Go to Appearance > As option here is a Shortcode creator enging. So fill the inp
 
 ##Features
 
-Shortcode System,
-woocommerce Prodct slider.
-Wordpress Jquery,
-Fully responsive,
-Work With all latest Version WordPress,
-Mobile Touch,
-Many more option.
+Shortcode System,<br/>
+woocommerce Prodct slider,<br/>
+Wordpress Jquery,<br/>
+Fully responsive,<br/>
+Work With all latest Version WordPress,<br/>
+Mobile Touch,<br/>
+Many more option.<br/>
 
 
 ##Download
