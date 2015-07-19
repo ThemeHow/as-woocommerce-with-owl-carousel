@@ -24,7 +24,7 @@ Go to Appearance > As option here is a Shortcode creator enging. So fill the inp
 
 **Note!** Carousel Name must be an unique name. If you not use unique name so carousel not working.
 
-*Optional* may you save All option.
+**Optional** may you save All option.
 
 ##Features
 
