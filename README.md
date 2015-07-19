@@ -22,7 +22,7 @@ Here you can create Shortcode and publish a carousel for your site. So create a 
 
 Go to Appearance > As option here is a Shortcode creator enging. So fill the input field as your choice.
 
-*Note!* Carousel Name must be an unique name. If you not use unique name so carousel not working.
+**Note!** Carousel Name must be an unique name. If you not use unique name so carousel not working.
 
 *Optional* may you save All option.
 
@@ -35,7 +35,6 @@ Fully responsive,
 Work With all latest Version WordPress,
 Mobile Touch,
 Many more option.
-
 
 
 ##Download
