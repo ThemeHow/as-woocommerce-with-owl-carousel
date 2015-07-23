@@ -13,7 +13,7 @@ Here you can create Shortcode and publish a carousel for your site. So create a 
 
 ## Installation
 
-1. Upload ‘as-owl-carousel‘ folder to the ‘/wp-content/plugins/’ directory or Install as a regullar WordPress plugin
+1. Upload ‘as-woocommerce-with-owl-carousel‘ folder to the ‘/wp-content/plugins/’ directory or Install as a regullar WordPress plugin
 2. You will see a options page go to Appearance > As option and create short code.
 
 ### All credit goes to owl carousel
