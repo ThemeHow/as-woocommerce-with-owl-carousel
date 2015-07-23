@@ -55,8 +55,11 @@ Demo 1
 
 ![Screenshot](https://github.com/anuislam/as-woocommerce-with-owl-carousel/blob/master/screenshot/screenshot-1.png)
 
+Demo 2
 
 ![Screenshot](https://github.com/anuislam/as-woocommerce-with-owl-carousel/blob/master/screenshot/screenshot-2.png)
+
+Demo 3
 
 ![Screenshot](https://github.com/anuislam/as-woocommerce-with-owl-carousel/blob/master/screenshot/screenshot-3.png)
 
