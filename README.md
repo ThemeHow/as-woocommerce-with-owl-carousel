@@ -53,7 +53,7 @@ See the Live demo  <a href="http://as-wc-owl.tk/">Demo</a>
 
 Demo 1
 
-![Screenshot](https://github.com/anuislam/as-woocommerce-with-owl-carousel/screenshot/screenshot-1.png)
+![Screenshot](https://github.com/anuislam/as-woocommerce-with-owl-carousel/blob/master/screenshot/screenshot-1.png)
 
 
 ![Screenshot](https://github.com/anuislam/as-woocommerce-with-owl-carousel/screenshot/screenshot-2.png)
