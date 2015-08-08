@@ -157,6 +157,9 @@ global $wpdb;
 					)
 
 			);
+
+	$as_woo_owl_save_conf = 'Settings saved';
+
 	}
 }
 
@@ -179,6 +182,11 @@ foreach (as_woo_owl_all_options_show() as $as_woo_key => $as_woo_value) {
 	<div class="as_woo_owl_header">
 		<div id="as_woo_owl_header_select" onclick="selectText('as_woo_owl_header_select')">[as_featured_product]</div>
 	</div>
+	<?php if(isset($as_woo_owl_save_conf) === true){
+		echo '<div class="as_woo_owl_save_conf">
+		<strong>'.$as_woo_owl_save_conf.'.</strong><span>x</span>
+	</div>';
+	} ?>
 <div class="as_woo_owl_body">
 <div class="as_woo_owl_admin_item">
 	<h3>Carousel Name</h3>
