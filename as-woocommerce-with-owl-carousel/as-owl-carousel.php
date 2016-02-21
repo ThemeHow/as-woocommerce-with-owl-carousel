@@ -1,7 +1,7 @@
 <?php
 /**
  * @package as-woocommerce-with-owl-carousel
- * @version 1.2
+ * @version 1.3
  * @licence GPLv2
  */
 
@@ -10,8 +10,8 @@ Plugin Name: AS woocommerce with owl carousel
 Plugin URI: https://wordpress.org/plugins/as-woocommerce-with-owl-carousel/
 Description: AS woocommerce with owl carousel is a jquery plugin for WordPress site. This plugin will create a nice carousel for your site.
 Author: anuislam
-Version: 1.2
-Author URI: http://asfoundation.tk/
+Version: 1.3
+Author URI: http://anuislamshohag.tk
 */
 
 /*  Copyright 2015  anuislam  (email : anuislams@gmail.com)
