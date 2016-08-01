@@ -7,7 +7,7 @@ As woocommerce with owl carousel is a jquery plugin for WordPress site. This plu
 After installing and Activating the plugin, go to WordPress Admin Dahsbord and then go to
 
 ```
-Appearance > As option
+As Short code > As Short code
 ```
 Here you can create Shortcode and publish a carousel for your site. So create a Shortcode as you choice and see a nice carousel at your site front-end.
 
@@ -20,7 +20,7 @@ Here you can create Shortcode and publish a carousel for your site. So create a 
 
 ##How to use
 
-Go to **Appearance > As option**, Here is a Shortcode creator enging. So fill the input field as your choice.
+Go to **As Short code > As Short code**, Here is a Shortcode creator enging. So fill the input field as your choice.
 Click get shortcode and copy this shortcode publish this.
 Save button is **optional** if you need save all option you can use it.
 **Note!** Carousel Name must be an unique name. If you not use unique name so carousel not working.
@@ -37,6 +37,17 @@ Save button is **optional** if you need save all option you can use it.
 *9 Deterrent button,
 *6 Deterrent carousel icon.
 
+##Changelog
+
+*1.4
+*Release Date - 1 August, 2016
+*Add image crop option.
+*Add image size option.
+*Description limit option.
+*Add preloader.
+*Add preloader admin all option.
+*You can show any type of product.
+*More left right icon.
 
 ##Download
 

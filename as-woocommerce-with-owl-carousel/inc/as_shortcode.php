@@ -2,27 +2,31 @@
 
 function as_woo_owl_excerpt($num) {
 global $post;
-$as_limit = $num+1;
-$as_excerpt = explode(' ', $post->post_excerpt, $as_limit);
-array_pop($as_excerpt);
-echo implode(" ", $as_excerpt);
+$as_woo_owl_exce = strip_tags($post->post_excerpt);
+
+echo substr($as_woo_owl_exce, 0, $num);
 }
 
-function as_woo_owl_add_cart_button($button, $add_to_cartsdsd){
-global $product;
+function as_woo_owl_add_cart_button($button, $add_to_cartsdsd, $text = 'Add to cart', $id, $after_carttext = 'View Cart'){
+ $as_woo_set_value = get_option('as_woo_owl_all_settings_save');
+
 if($button == 'default'){
 	$button = 'themeforest';
 }
+global $woocommerce;
+$as_woo_loader = as_woo_owl_url.'/ico/ajax-loader.gif';
+$as_woo_loader = (!empty($as_woo_set_value['as_atc_loader_gif'])) ? $as_woo_set_value['as_atc_loader_gif'] : $as_woo_loader ;
+$as_opc = ($as_woo_set_value['as_woo_add_to_cart_bg_opacity'] == 10) ? 1 : '0.'.$as_woo_set_value['as_woo_add_to_cart_bg_opacity'] ;
 if ($add_to_cartsdsd == 'true') {
   return apply_filters( 'as_woo_owl_add_to_cart',
-    sprintf( '<a class="'.$button.' add_to_cart_button product_type_simple" href="%s" rel="nofollow" data-product_id="%s" data-product_sku="%s" data-quantity="%s" class="button %s product_type_%s">%s</a>',
-      esc_url( $product->add_to_cart_url() ),
-      esc_attr( $product->id ),
-      esc_attr( $product->get_sku() ),
-      esc_attr( isset( $quantity ) ? $quantity : 1 ),
-      $product->is_purchasable() && $product->is_in_stock() ? 'add_to_cart_button' : '',
-      esc_attr( $product->product_type ),
-      esc_html( $product->add_to_cart_text() )
+    sprintf( '<a href="%s" id="%s" rel="nofollow" as_woo_owl_product_id="%s" class="'.$button.'" ><span class="as_woo_owl_ajax_loader_gif" style="background-color: rgba('.as_woo_owl_hex2rgb($as_woo_set_value['as_woo_add_to_cart_bg_color']).','.$as_opc.');background-image:url(\'%s\');"></span>%s</a><a href="%s" class="as_woo_owl_view_cart '.$button.'" id="as_woo_owl_'.$id.'_new_id">%s</a>',
+      esc_url( $woocommerce->cart->get_cart_url() ),
+      esc_attr( 'as_woo_owl_ajax_add_to_cart' ),
+      esc_attr( $id ),
+      esc_url( $as_woo_loader ),
+      esc_html( $text ),
+      esc_url( $woocommerce->cart->get_cart_url() ),
+      esc_html( $after_carttext )
     ),
   $product );
 }else{
@@ -32,12 +36,9 @@ if ($add_to_cartsdsd == 'true') {
 }
 
 
-
-function As_woo_image_size(){
-	add_image_size( 'as_woo_owl_image', 300, 200, true );
-}
-add_action('after_setup_theme', 'As_woo_image_size');
 function as_woocommerce_owl_featured_shortcode($atts, $content = null){
+  $as_woo_set_value = get_option('as_woo_owl_all_settings_save');
+  $as_woo_d_limit = (empty($as_woo_set_value)) ? 0 : $as_woo_set_value['as_woo_d_limit'] ;
 	$as_woo_featured = extract(shortcode_atts( array(
                'carousel_name'      => '',
                'items'             => '',
@@ -68,80 +69,61 @@ function as_woocommerce_owl_featured_shortcode($atts, $content = null){
                'afterlazyload'     => '',
                'add_to_cart'     => 'true',
                'icon'     => 'left11.right11',
-               'button'     => 'default'
+               'button'     => 'default',
+               'porduct_type'     => '_featured',
+               'show_porducts'    => -1,
+               'product_cat'      => ''
 		), $atts));
 	ob_start();
 	//start product query
-	$as_query = array(
-        'post_type'      		=> 'product',
-		'post_status' 			=> 'publish',
-		'ignore_sticky_posts' 	=> 1,
-        'posts_per_page' 		=> -1,
-        'meta_query' 			=> array(
-								array(
-									'key' => '_visibility',
-									'value' => array('catalog', 'visible'),
-									'compare' => 'IN'
-									),
-									array(
-										'key' => '_featured',
-										'value' => 'yes'
-										)
-									)
-								);
+
+if ($porduct_type == '_featured') {
+  $as_query = array(
+  'post_type'         => 'product',
+  'post_status'       => 'publish',
+  'posts_per_page'    => -1,
+  'meta_query'      => array(
+          array(
+            'key' => '_visibility',
+            'value' => array('catalog', 'visible'),
+            'compare' => 'IN'
+            ),
+            array(
+              'key' => '_featured',
+              'value' => 'yes'
+              )
+            )
+          );
+}else{
+  $porduct_type = trim($porduct_type);
+  $porduct_type = preg_replace('/\s+/', '', $porduct_type);
+  $porduct_type = sanitize_text_field( $porduct_type );
+
+  $product_cat = trim($product_cat);
+  $product_cat = preg_replace('/\s+/', '', $product_cat);
+  $product_cat = sanitize_text_field( $product_cat );
+
+  $as_query = array(
+    'product_cat'       => (!empty($product_cat)) ? $product_cat : '',
+    'post_type'         => 'product',
+    'post_status'       => 'publish',
+    'posts_per_page'    => -1
+          );
+}
+
+
 	$as_product_query = new WP_query($as_query);
 
 $icon = explode('.', $icon);
 
   ?>
 
-<div class="as_woo_owl_outer">
-    <div class="as_woo_owl_next_<?php echo $carousel_name; ?> as_woo_owl_next">
-        <img src="<?php echo plugins_url( '../ico/'.$icon[1].'.png', __FILE__ ) ?>" alt="">
-    </div>
-    <div id="as_woo_owl_name_<?php echo $carousel_name; ?>" class="as_woo_owl_middil">
+  <script>
 
-<?php	while ( $as_product_query->have_posts() ) : $as_product_query->the_post(); ?>
-
-
-<div class="as_woo_owl_item">
-	<figure class="as_woo_owl_image">
-		<a href="<?php echo get_the_permalink(); ?>"><?php the_post_thumbnail('as_woo_owl_image', array('alt' => get_the_title())); ?></a>
-	</figure>
-	<div class="as_woo_owl_content">
-		<h3>
-		    <a href="<?php echo get_the_permalink(); ?>"><?php echo get_the_title(); ?></a>         </h3>
-		<div class="as_woo_owl_description">
-			<?php global $product; if ( $price_html = $product->get_price_html() ) : ?>
-			<span class="as_woo_owl_price"><?php echo $price_html; ?></span>
-			<?php endif; ?>
-			<div class="as_woo_owl_pera" >
-				<p><?php as_woo_owl_excerpt('20'); ?></p>
-			</div>
-		</div>
-		<div class="as_woo_owl_add_to_cart_button">
-		    <?php echo as_woo_owl_add_cart_button($button, $add_to_cart); ?>
-		</div>
-
-	</div>
-</div>
-
-
-	<?php
-	endwhile;
-    ?>
-    </div>
-    <div class="as_woo_owl_prev_<?php echo $carousel_name; ?> as_woo_owl_prev">
-    <img src="<?php echo plugins_url( '../ico/'.$icon[0].'.png', __FILE__ ) ?>" alt="">
-    </div>
-
-    </div>
-	<script>
-
-	jQuery(document).ready(function($) {
+  jQuery(document).ready(function($) {
 
     var as_woo_owl_ac = $("#as_woo_owl_name_<?php echo $carousel_name; ?>");
-	as_woo_owl_ac.owlCarousel({
+  as_woo_owl_ac.owlCarousel({
       <?php
 
       if (!empty($items)) {
@@ -223,7 +205,7 @@ $icon = explode('.', $icon);
         echo 'afterLazyLoad : '.$afterlazyload.',';
       }
         ?>
-	});
+  });
 
     $(".as_woo_owl_prev_<?php echo $carousel_name; ?>").click(function(){
         as_woo_owl_ac.trigger('owl.next');
@@ -233,8 +215,79 @@ $icon = explode('.', $icon);
     })
 
 
-	});
-	</script>
+  });
+  </script>
+
+<div class="as_woo_owl_outer as_def_pre_load">
+<?php
+$as_spin    = as_woo_owl_url.'/ico/spin.gif';
+$as_woo_img = (!empty($as_woo_set_value['loader_gif'])) ? $as_woo_set_value['loader_gif'] : $as_spin ;
+$as_bg_op    = ($as_woo_set_value['as_woo_loader_bg_opacity'] == 10) ? 1 : '0.'.$as_woo_set_value['as_woo_loader_bg_opacity'] ;
+
+?>
+<div class="as_woo_pre_load" style="background-image: url('<?php echo $as_woo_img; ?>');">
+</div>
+<style>
+  .as_def_pre_load:before{
+    background-color: <?php echo $as_woo_set_value['as_woo_loader_bg_color']; ?>;
+    opacity: <?php echo $as_bg_op; ?>;
+  }
+</style>
+
+    <div class="as_woo_owl_next_<?php echo $carousel_name; ?> as_woo_owl_next">
+        <img src="<?php echo plugins_url( '../ico/'.$icon[1].'.png', __FILE__ ) ?>" alt="">
+    </div>
+    <div id="as_woo_owl_name_<?php echo $carousel_name; ?>" class="as_woo_owl_middil">
+
+<?php	while ( $as_product_query->have_posts() ) : $as_product_query->the_post(); ?>
+
+
+<div class="as_woo_owl_item">
+	<figure class="as_woo_owl_image">
+		<a href="<?php echo get_the_permalink(); ?>"><?php
+$as_woo_img = wp_get_attachment_image_src( get_post_thumbnail_id( get_the_id() ), 'as_woo_owl_image' );
+?>
+    <img style="max-height:200px;" src="<?php echo $as_woo_img[0] ?>" alt="<?php echo get_the_title(); ?>">
+</a>
+	</figure>
+	<div class="as_woo_owl_content">
+		<h3>
+		    <a href="<?php echo get_the_permalink(); ?>"><?php echo get_the_title(); ?></a>         </h3>
+		<div class="as_woo_owl_description">
+			<?php global $product; if ( $price_html = $product->get_price_html() ) : ?>
+			<span class="as_woo_owl_price" as_woo_oel="<?php echo get_the_id(); ?>"><?php echo $price_html; ?></span>
+			<?php endif; ?>
+<?php
+
+if ($as_woo_d_limit != 0) {
+  ?>
+      <div class="as_woo_owl_pera" >
+        <p><?php as_woo_owl_excerpt($as_woo_d_limit); ?></p>
+      </div>
+  <?php
+}
+?>
+
+
+
+		</div>
+		<div class="as_woo_owl_add_to_cart_button">
+		    <?php echo as_woo_owl_add_cart_button($button, $add_to_cart, 'Add to cart', $product->id ); ?>
+		</div>
+
+	</div>
+</div>
+
+
+	<?php
+	endwhile;
+    ?>
+    </div>
+    <div class="as_woo_owl_prev_<?php echo $carousel_name; ?> as_woo_owl_prev">
+    <img src="<?php echo plugins_url( '../ico/'.$icon[0].'.png', __FILE__ ) ?>" alt="">
+    </div>
+
+    </div>
 
 	<?php
 	return ob_get_clean();
