@@ -39,15 +39,15 @@ Save button is **optional** if you need save all option you can use it.
 
 ##Changelog
 
-*1.4
-*Release Date - 1 August, 2016
-*Add image crop option.
-*Add image size option.
-*Description limit option.
-*Add preloader.
-*Add preloader admin all option.
-*You can show any type of product.
-*More left right icon.
+*1.4<br />
+*Release Date - 1 August, 2016<br />
+*Add image crop option.<br />
+*Add image size option.<br />
+*Description limit option.<br />
+*Add preloader.<br />
+*Add preloader admin all option.<br />
+*You can show any type of product.<br />
+*More left right icon.<br />
 
 ##Download
 
