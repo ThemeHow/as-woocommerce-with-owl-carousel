@@ -2,8 +2,7 @@
 As woocommerce with owl carousel wordpress plugins created by Anu islam shohag.
 
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/bMwAjxEmXXA" frameborder="0" allowfullscreen></iframe>
-
+[![IMAGE How to setup "As woocomerce with owl carousel" WordPress plugin](http://img.youtube.com/vi/bMwAjxEmXXA/0.jpg)](http://www.youtube.com/watch?v=bMwAjxEmXXA "How to setup "As woocomerce with owl carousel" WordPress plugin")
 
 ## Description
 
