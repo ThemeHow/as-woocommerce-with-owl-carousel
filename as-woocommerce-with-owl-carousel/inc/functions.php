@@ -225,7 +225,7 @@ function as_woo_owl_validate_options(){
 
 			if ($_POST['stopOnHover'] == 'true') {
 				$as_woo_data['stopOnHover'] = 'true';				
-			}elseif ($as_woo_data['stopOnHover'] == 'false') {
+			}elseif ($_POST['stopOnHover'] == 'false') {
 				$as_woo_data['stopOnHover'] = 'false';
 			}else{
 				$as_woo_data['stopOnHover'] = 1;
@@ -669,7 +669,7 @@ add_action('wp_ajax_nopriv_as_woo_owl_add_to_cart', 'as_woo_owl_add_to_cart');
 function as_woo_owl_settings(){
 	global $as_woo_owl_setting_error;
 	$as_woo_owl_setting_error = new WP_Error();
-	if ($_POST['as_woo_owl_setting_submit']) {
+	if (!empty($_POST['as_woo_owl_setting_submit'])) {
 		$loader_gif 					= esc_url($_POST['loader_gif']);
 		$as_atc_loader_gif 				= esc_url($_POST['as_atc_loader_gif']);
 		$as_woo_loader_bg_color 		= sanitize_text_field($_POST['as_woo_loader_bg_color']);
@@ -834,7 +834,7 @@ $as_woo_set_value = get_option('as_woo_owl_all_settings_save');
 $as_woo_width   = (empty($as_woo_set_value['as_woo_width'])) ? 300 : $as_woo_set_value['as_woo_width'];
 $as_woo_height   = (empty($as_woo_set_value['as_woo_height'])) ? 200 : $as_woo_set_value['as_woo_height'];
 
-if ($as_woo_set_value['as_woo_checkbox'] == 'yes') {
+if (@$as_woo_set_value['as_woo_checkbox'] == 'yes') {
        add_image_size( 'as_woo_owl_image', $as_woo_width, $as_woo_height, true );
 }else{
     add_image_size( 'as_woo_owl_image', 300, 200, true );
