@@ -60,6 +60,9 @@ Save button is **optional** if you need save all option you can use it.
 
 <p>You can Download here <a class="themeforest" style="margin-left: 50px;" href="http://as-wc-owl.tk/wp-content/uploads/2015/07/as-woocommerce-with-owl-carousel.zip">Our website</a></p>
 
+<p>See more demo <a class="themeforest" style="margin-left: 50px;" href="https://www.workdiaryblog.com/work/woocomerce-with-owl-carousel-wpplugin/">www.workdiaryblog.com</a></p>
+
+
 
 ##Demo
 
